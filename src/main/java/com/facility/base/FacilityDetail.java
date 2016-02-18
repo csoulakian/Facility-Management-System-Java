@@ -11,7 +11,7 @@ public class FacilityDetail {
 	
 	
 	FacilityDetail(int type, Object detail) {
-		this.type = type;
+		type = this.type;
 		
 		switch (type) {
 			case 0:
@@ -53,12 +53,12 @@ public class FacilityDetail {
 	
 	//TODO 
 	public int getActualUsage() {
-		return 0;
+		return actualUsage;
 	}
 	
 	//TODO
 	public double getUsageRate() {
-		return 0.0;
+		return usageRate;
 	}
 	
 	
