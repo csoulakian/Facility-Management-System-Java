@@ -27,7 +27,6 @@ public class Facility {
 		for(int i = 1; i <= numberOfRooms; i++) {
 			createRoom(i);
 		}
-		
 	}
 	
 
@@ -43,7 +42,11 @@ public class Facility {
 	public void createRoom(int roomNumber) {
 		Room room = new Room(roomNumber);
 		listOfRooms.add(room);
-		
 	}
+	
+	public List<FacilityDetail> getFacilityInformation() {
+		return listOfDetails;
+	}
+
 	
 }

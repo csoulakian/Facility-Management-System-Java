@@ -8,7 +8,6 @@ public class Room extends Facility {
 	public Room (int roomNumber) {
 		facilityID = super.getFacilityID();
 		this.roomNumber = roomNumber;
-		
 	}
 	
 	public int getFacilityID() {
@@ -18,7 +17,5 @@ public class Room extends Facility {
 	public int getRoomNumber() {
 		return roomNumber;
 	}
-
-	
 	
 }

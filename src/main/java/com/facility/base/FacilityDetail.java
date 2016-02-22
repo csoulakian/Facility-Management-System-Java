@@ -6,8 +6,7 @@ public class FacilityDetail {
 	private String name;
 	private int facilityID;
 	private int numberOfRooms;
-	private int actualUsage;
-	private double usageRate;
+	private int phoneNumber;
 	
 	
 	FacilityDetail(int type, Object detail) {
@@ -23,22 +22,29 @@ public class FacilityDetail {
 			case 2:
 				setNumberOfRooms((Integer) detail);
 				break;
+			case 3:
+				setPhoneNumber((Integer) detail);
+				break;
 		}
 		
 	}
 	
 	private void setName(String nameOfFacility) {
-		name = nameOfFacility;
+		this.name = nameOfFacility;
 	}
 	
 	private void setFacilityID(int idOfFacility) {
-		facilityID = idOfFacility;
+		this.facilityID = idOfFacility;
 	}
 	
 	private void setNumberOfRooms(int totalRooms) {
-		numberOfRooms = totalRooms;
+		this.numberOfRooms = totalRooms;
 	}
 	
+	public void setPhoneNumber(int phone) {
+		this.phoneNumber = phone;
+	}
+		
 	public String getName() {
 		return this.name;
 	}
@@ -50,15 +56,9 @@ public class FacilityDetail {
 	public int getNumberOfRooms() {
 		return this.numberOfRooms;
 	}
-	
-	//TODO 
-	public int getActualUsage() {
-		return actualUsage;
-	}
-	
-	//TODO
-	public double getUsageRate() {
-		return usageRate;
+
+	public int getPhoneNumber() {
+		return this.phoneNumber;
 	}
 	
 	
