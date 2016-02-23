@@ -10,7 +10,7 @@ public class FacilityManager {
 	
 	public FacilityManager() {}
 	
-	public Facility addNewFacility(String name, int facilityID, int numberOfRooms) {
+/*	public Facility addNewFacility(String name, int facilityID, int numberOfRooms) {
 		Facility facility = new Facility(name, facilityID, numberOfRooms);
 		if(!facilityExists(facilityID)) {
 			listOfFacilities.add(facility);
@@ -18,7 +18,7 @@ public class FacilityManager {
 		} else {
 			throw new IllegalArgumentException("This facility already exists.");
 		}
-	}
+	}*/
 	
 	public String removeFacility(int facilityID) {
 		if(facilityExists(facilityID)) {
