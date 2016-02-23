@@ -6,16 +6,24 @@ import com.facility.base.Facility;
 
 public class FacilityUse {
 	
-	boolean inUse;
+	private int actualUsage;
+	private double usageRate;
 
 	public FacilityUse() {}
 	
-	public void assignFacilityToUse(Facility facility, Client client, Date start, Date end) {
-		
+	public int getActualUsage() {
+		return actualUsage;
 	}
-	
-	public boolean isInUseDuringInterval(Facility facility, Date start, Date end) {
-		return true;
+
+	public void setActualUsage(int actualUsage) {
+		this.actualUsage = actualUsage;
 	}
-	
+
+	public double getUsageRate() {
+		return usageRate;
+	}
+
+	public void setUsageRate(double usageRate) {
+		this.usageRate = usageRate;
+	}
 }

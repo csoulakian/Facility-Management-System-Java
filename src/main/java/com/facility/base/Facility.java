@@ -13,12 +13,11 @@ import java.util.List;
 public class Facility {
 	
 	private int facilityID;
-	List<FacilityDetail> listOfDetails;
-	List<Room> listOfRooms;
+	private FacilityDetail detailsAboutFacility;
 	
-	public Facility() {}
+	//public Facility() {}
 	
-	public Facility(String name, int facilityID, int numberOfRooms) {
+	/*public Facility(String name, int facilityID, int numberOfRooms) {
 		facilityID = this.facilityID;
 		addFacilityDetail(1, name);
 		addFacilityDetail(2, facilityID);
@@ -27,26 +26,27 @@ public class Facility {
 		for(int i = 1; i <= numberOfRooms; i++) {
 			createRoom(i);
 		}
-	}
+	}*/
 	
+	
+	public FacilityDetail getDetailsAboutFacility() {
+		return detailsAboutFacility;
+	}
 
-	public void addFacilityDetail(int type, Object detailAboutFacility) {
-		FacilityDetail detail = new FacilityDetail(type, detailAboutFacility);
-		listOfDetails.add(detail);
+	public void setDetailsAboutFacility(FacilityDetail detailsAboutFacility) {
+		this.detailsAboutFacility = detailsAboutFacility;
 	}
-	
+
+	public void setFacilityID(int facilityID) {
+		this.facilityID = facilityID;
+	}
+
 	public int getFacilityID() {
 		return facilityID;
 	}
+
 	
-	public void createRoom(int roomNumber) {
-		Room room = new Room(roomNumber);
-		listOfRooms.add(room);
-	}
-	
-	public List<FacilityDetail> getFacilityInformation() {
-		return listOfDetails;
-	}
+
 
 	
 }
