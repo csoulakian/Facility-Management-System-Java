@@ -16,4 +16,25 @@ public class FacilityService {
 	      System.err.println(se.getMessage());
 	    }
 	}
+	
+	public Facility findFacilityById(int id) {
+		
+		try {
+			Facility fac = facDAO.getFacilityInformation(id);
+	    	return fac;
+	    } catch (Exception se) {
+	      System.err.println("FacilityService: Threw an Exception retrieving facility.");
+	      System.err.println(se.getMessage());
+	    }
+		return null;
+	}
+	public void removeFacility(int id) {
+		
+		try {
+			facDAO.removeFacility(id);
+	    } catch (Exception se) {
+	      System.err.println("FacilityService: Threw an Exception retrieving facility.");
+	      System.err.println(se.getMessage());
+	    }
+	}
 }
