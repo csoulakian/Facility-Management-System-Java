@@ -13,7 +13,10 @@ public class FacilityDAO {
 
 	public FacilityDAO() {}
 	
-	
+	/***
+	 * Removes facility from the facility table and facility_detail table.
+	 * @param ID of facility to be removed
+	 */
 	public void removeFacility(int ID) {
 		
 	    try { 		
@@ -37,9 +40,9 @@ public class FacilityDAO {
 	      System.err.println("FacilityDAO: Threw a SQLException removing the Facility object from Facility table.");
 	      System.err.println(se.getMessage());
 	      se.printStackTrace();
-	    }
+	   }
 	 	 
-	    try { 		
+	   try { 		
 	    	//Get Facility
 	    	Connection con = DBHelper.getConnection();
 			 PreparedStatement facPst = null;
@@ -64,46 +67,53 @@ public class FacilityDAO {
 	    
 	  }
 	
+	/***
+	 * Returns detail information about a facility, including its name, facility ID, number of rooms, 
+	 * and a phone number if it's listed.
+	 * @param ID of facility
+	 * @return facility detail information
+	 */
 	public Facility getFacilityInformation(int ID) {
 	 	 
-	    try { 		
+	    try {
+	    	
 	    	//Get Facility
-	    	Statement st = DBHelper.getConnection().createStatement();
+    		Statement st = DBHelper.getConnection().createStatement();
 	    	String selectFacilityQuery = "SELECT id from facility where id = '" + ID + "'";
 
 	    	ResultSet facRS = st.executeQuery(selectFacilityQuery);      
 	    	System.out.println("FacilityDAO: *************** Query " + selectFacilityQuery);
 	    	
-	      //Get Customer
-    	  Facility fac1 = new Facility();
-	      while ( facRS.next() ) {
-	    	  fac1.setFacilityID(facRS.getInt("id"));
-	    	
-	      }
-	      //close to manage resources
-	      facRS.close();
-	      	    		  
-	      //Get Address
-	      String selectDetailQuery = "SELECT name, facility_id,number_of_rooms,phone FROM facility_detail WHERE facility_id = '" + ID + "'";
-	      ResultSet detRS = st.executeQuery(selectDetailQuery);
-    	  FacilityDetail detail = new FacilityDetail();
-    	  
-    	  System.out.println("FacilityDAO: *************** Query " + selectDetailQuery);
-    	  
-	      while ( detRS.next() ) {
-	    	  detail.setName(detRS.getString("name"));
-	    	  detail.setFacilityID(detRS.getInt("facility_id"));
-	    	  detail.setNumberOfRooms(detRS.getInt("number_of_rooms"));
-	    	  detail.setPhoneNumber(detRS.getInt("phone"));
-	      }
-	      
-	      fac1.setDetailsAboutFacility(detail);
-	      //close to manage resources
-	      detRS.close();
-	      st.close();
-	      
-	      return fac1;
-	    }	    
+	    	Facility fac1 = new Facility();
+		    while ( facRS.next() ) {
+		    	fac1.setFacilityID(facRS.getInt("id"));
+		    }
+		    
+		    //close to manage resources
+		    facRS.close();
+		      	    		  
+		    //Get Address
+		    String selectDetailQuery = "SELECT name,facility_id,number_of_rooms,phone FROM facility_detail WHERE facility_id = '" + ID + "'";
+		    ResultSet detRS = st.executeQuery(selectDetailQuery);
+	    	FacilityDetail detail = new FacilityDetail();
+	    	  
+	    	System.out.println("FacilityDAO: *************** Query " + selectDetailQuery);
+	    	  
+		    while ( detRS.next() ) {
+		    	detail.setName(detRS.getString("name"));
+		    	detail.setFacilityID(detRS.getInt("facility_id"));
+		    	detail.setNumberOfRooms(detRS.getInt("number_of_rooms"));
+		    	detail.setPhoneNumber(detRS.getInt("phone"));
+		    }
+		      
+		    fac1.setDetailsAboutFacility(detail);
+		    //close to manage resources
+		    detRS.close();
+		    st.close();
+		      
+		    return fac1;
+	    }
+	    
 	    catch (SQLException se) {
 	      System.err.println("FacilityDAO: Threw a SQLException retrieving the Facility object.");
 	      System.err.println(se.getMessage());
@@ -111,8 +121,13 @@ public class FacilityDAO {
 	    }
 	    
 	    return null;
-	  }
+	}
 	
+	/***
+	 * Add a new facility to the facility table and details about the facility to facility_detail table.
+	 * Must create a new facility object before running addNewFacility method.
+	 * @param fac Facility object to be added to the database
+	 */
 	public void addNewFacility(Facility fac) {
 		Connection con = DBHelper.getConnection();
         PreparedStatement facPst = null;

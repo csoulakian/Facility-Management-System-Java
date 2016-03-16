@@ -28,6 +28,7 @@ public class FacilityService {
 	    }
 		return null;
 	}
+	
 	public void removeFacility(int id) {
 		
 		try {
