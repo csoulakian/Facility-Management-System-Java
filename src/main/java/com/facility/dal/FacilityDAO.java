@@ -103,7 +103,9 @@ public class FacilityDAO {
 		    	detail.setName(detRS.getString("name"));
 		    	detail.setFacilityID(detRS.getInt("facility_id"));
 		    	detail.setNumberOfRooms(detRS.getInt("number_of_rooms"));
-		    	detail.setPhoneNumber(detRS.getInt("phone"));
+		    	if (detRS.getInt("phone") != 0) {
+		    		detail.setPhoneNumber(detRS.getInt("phone"));
+		    	}
 		    }
 		      
 		    fac1.setDetailsAboutFacility(detail);
@@ -145,8 +147,12 @@ public class FacilityDAO {
             addPst = con.prepareStatement(addStm);
             addPst.setString(1, fac.getDetailsAboutFacility().getName());
             addPst.setInt(2, fac.getDetailsAboutFacility().getFacilityID());  
-            addPst.setInt(3, fac.getDetailsAboutFacility().getNumberOfRooms());       
-            addPst.setInt(4, fac.getDetailsAboutFacility().getPhoneNumber());
+            addPst.setInt(3, fac.getDetailsAboutFacility().getNumberOfRooms());
+            if (fac.getDetailsAboutFacility().getPhoneNumber() != 0) {
+            	addPst.setInt(4, fac.getDetailsAboutFacility().getPhoneNumber());
+            } else {
+            	addPst.setNull(4, java.sql.Types.INTEGER);
+            }
             addPst.executeUpdate();
         } catch (SQLException ex) {
 
