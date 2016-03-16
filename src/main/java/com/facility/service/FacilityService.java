@@ -12,12 +12,12 @@ public class FacilityService {
 		try {
 			facDAO.addNewFacility(facility);
 	    } catch (Exception se) {
-	      System.err.println("FacilityService: Threw an Exception retrieving facility.");
+	      System.err.println("FacilityService: Threw an Exception adding new facility.");
 	      System.err.println(se.getMessage());
 	    }
 	}
 	
-	public Facility findFacilityById(int id) {
+	public Facility getFacilityInformation(int id) {
 		
 		try {
 			Facility fac = facDAO.getFacilityInformation(id);
@@ -34,7 +34,7 @@ public class FacilityService {
 		try {
 			facDAO.removeFacility(id);
 	    } catch (Exception se) {
-	      System.err.println("FacilityService: Threw an Exception retrieving facility.");
+	      System.err.println("FacilityService: Threw an Exception removing facility.");
 	      System.err.println(se.getMessage());
 	    }
 	}

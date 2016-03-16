@@ -27,7 +27,7 @@ public class FacilityClient {
         System.out.println("FacilityClient: *************** trying to search facility in the database *************************");
         
  
-        Facility searchedFacility = facService.findFacilityById(1); 
+        Facility searchedFacility = facService.getFacilityInformation(1); 
         
         System.out.println("FacilityInformation: *************** Here is searched facility information *************************");
           System.out.println("\tName: \t\t\t" + searchedFacility.getFacilityID() + "\n");
