@@ -5,9 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.facility.base.*;
-import com.facility.manager.*;
 
 public class FacilityDAO {
 
@@ -21,7 +22,7 @@ public class FacilityDAO {
 		
 	    try { 		
 	    	Connection con = DBHelper.getConnection();
-			 PreparedStatement facPst = null;
+			PreparedStatement facPst = null;
 	    	//Get Facility
 	        
 	    	String removeFacilityQuery = "delete from facility where id = '" + ID + "'";
@@ -142,7 +143,7 @@ public class FacilityDAO {
             facPst.setInt(1, fac.getFacilityID());
             facPst.executeUpdate();
 
-        	//Insert the customer address object
+        	//Insert the facility_detail object
             String addStm = "INSERT INTO facility_detail(name, facility_id, number_of_rooms, phone) VALUES(?, ?, ?, ?)";
             addPst = con.prepareStatement(addStm);
             addPst.setString(1, fac.getDetailsAboutFacility().getName());
@@ -173,5 +174,66 @@ public class FacilityDAO {
             }
         }
     }
+	
+	public void addFacilityDetail(int ID, int phoneNumber) {
+		
+		try { 		
+	    	Connection con = DBHelper.getConnection();
+			PreparedStatement facPst = null;
+	    	//Get Facility
+	        
+	    	String updateFacilityDetailQuery = "UPDATE facility_detail SET phone = ? WHERE facility_id = ?";
+	    
+            facPst = con.prepareStatement(updateFacilityDetailQuery);
+            facPst.setInt(1, phoneNumber);
+            facPst.setInt(2, ID);
+            facPst.executeUpdate();
+    
+	    	System.out.println("FacilityDAO: *************** Query " + updateFacilityDetailQuery);
+	    
+	      	    		  
+	   }	    
+	   catch (SQLException se) {
+	      System.err.println("FacilityDAO: Threw a SQLException updating the phone number in Facility Detail table.");
+	      System.err.println(se.getMessage());
+	      se.printStackTrace();
+	   }
+		
+		
+	}
+	
+	public List<Facility> listFacilities() {
+		
+		List<Facility> listOfFac = new ArrayList<Facility>();
+		
+		try {
+			
+			Statement st = DBHelper.getConnection().createStatement();
+	    	String getAllFacilitiesQuery = "SELECT * FROM facility";
+
+	    	ResultSet facRS = st.executeQuery(getAllFacilitiesQuery);      
+	    	System.out.println("FacilityDAO: *************** Query " + getAllFacilitiesQuery);
+	    	
+	    	Facility fac1 = new Facility();
+		    while ( facRS.next() ) {
+		    	fac1.setFacilityID(facRS.getInt("id"));
+		    	listOfFac.add(getFacilityInformation(fac1.getFacilityID()));
+		    }
+		    
+		    //close to manage resources
+		    facRS.close();
+	    	
+	    	
+		}
+    	catch (SQLException se) {
+  	      System.err.println("FacilityDAO: Threw a SQLException retrieving list of facilities.");
+  	      System.err.println(se.getMessage());
+  	      se.printStackTrace();
+  	   }
+	    	
+			
+		return listOfFac;
+	    	
+	}
 	
 }

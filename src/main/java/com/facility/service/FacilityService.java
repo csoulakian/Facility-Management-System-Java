@@ -1,6 +1,9 @@
 package com.facility.service;
 
 import com.facility.dal.FacilityDAO;
+
+import java.util.List;
+
 import com.facility.base.Facility;
 
 public class FacilityService {
@@ -37,5 +40,25 @@ public class FacilityService {
 	      System.err.println("FacilityService: Threw an Exception removing facility.");
 	      System.err.println(se.getMessage());
 	    }
+	}
+	
+	public void addFacilityDetail(int ID, int phoneNumber) {
+		try {
+			facDAO.addFacilityDetail(ID, phoneNumber);
+	    } catch (Exception se) {
+	      System.err.println("FacilityService: Threw an Exception updating phone in facility_detail.");
+	      System.err.println(se.getMessage());
+	    }
+	}
+	
+	public List<Facility> listFacilities() {
+		try {
+			return facDAO.listFacilities();
+	    } catch (Exception se) {
+	      System.err.println("FacilityService: Threw an Exception retrieving list of facilities.");
+	      System.err.println(se.getMessage());
+	    }
+		
+		return null;
 	}
 }
