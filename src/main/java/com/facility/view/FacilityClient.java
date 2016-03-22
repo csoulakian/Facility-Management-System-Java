@@ -8,7 +8,7 @@ import com.facility.service.*;
 
 public class FacilityClient {
 
-	public static void main (String args[]) throws Exception {
+	public FacilityClient() throws Exception {
 		FacilityService facService = new FacilityService();
 		
 		System.out.println("\nFacilityClient: *************** Instantiating a facility and its details *************************");
