@@ -175,6 +175,11 @@ public class FacilityDAO {
         }
     }
 	
+	/***
+	 * Adds optional detail information (phone number) about the facility
+	 * @param ID facility ID
+	 * @param phoneNumber number to be added
+	 */
 	public void addFacilityDetail(int ID, int phoneNumber) {
 		
 		try { 		
@@ -190,8 +195,7 @@ public class FacilityDAO {
             facPst.executeUpdate();
     
 	    	System.out.println("FacilityDAO: *************** Query " + updateFacilityDetailQuery);
-	    
-	      	    		  
+	    	  
 	   }	    
 	   catch (SQLException se) {
 	      System.err.println("FacilityDAO: Threw a SQLException updating the phone number in Facility Detail table.");
@@ -199,9 +203,12 @@ public class FacilityDAO {
 	      se.printStackTrace();
 	   }
 		
-		
 	}
 	
+	/***
+	 * List the name and ID number of all the facilities
+	 * @return list of facilities
+	 */
 	public List<Facility> listFacilities() {
 		
 		List<Facility> listOfFac = new ArrayList<Facility>();
@@ -223,7 +230,6 @@ public class FacilityDAO {
 		    //close to manage resources
 		    facRS.close();
 	    	
-	    	
 		}
     	catch (SQLException se) {
   	      System.err.println("FacilityDAO: Threw a SQLException retrieving list of facilities.");
@@ -231,7 +237,6 @@ public class FacilityDAO {
   	      se.printStackTrace();
   	   }
 	    	
-			
 		return listOfFac;
 	    	
 	}
