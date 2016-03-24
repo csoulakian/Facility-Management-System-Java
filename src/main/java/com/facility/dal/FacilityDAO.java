@@ -31,7 +31,7 @@ public class FacilityDAO {
            // facPst.setInt(1, fac.getFacilityID());
             facPst.executeUpdate();
     
-	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityQuery);
+	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityQuery + "\n");
 	    
 	      //close to manage resources
 	      //facRS.close();
@@ -54,7 +54,7 @@ public class FacilityDAO {
            // facPst.setInt(1, fac.getFacilityID());
             facPst.executeUpdate();
     
-	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityDetailQuery);
+	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityDetailQuery + "\n");
 	    
 	      //close to manage resources
 	      //facRS.close();
@@ -83,7 +83,7 @@ public class FacilityDAO {
 	    	String selectFacilityQuery = "SELECT id from facility where id = '" + ID + "'";
 
 	    	ResultSet facRS = st.executeQuery(selectFacilityQuery);      
-	    	System.out.println("FacilityDAO: *************** Query " + selectFacilityQuery);
+	    	System.out.println("FacilityDAO: *************** Query " + selectFacilityQuery + "\n");
 	    	
 	    	Facility fac1 = new Facility();
 		    while ( facRS.next() ) {
@@ -98,7 +98,7 @@ public class FacilityDAO {
 		    ResultSet detRS = st.executeQuery(selectDetailQuery);
 	    	FacilityDetail detail = new FacilityDetail();
 	    	  
-	    	System.out.println("FacilityDAO: *************** Query " + selectDetailQuery);
+	    	System.out.println("FacilityDAO: *************** Query " + selectDetailQuery + "\n");
 	    	  
 		    while ( detRS.next() ) {
 		    	detail.setName(detRS.getString("name"));
@@ -194,7 +194,7 @@ public class FacilityDAO {
             facPst.setInt(2, ID);
             facPst.executeUpdate();
     
-	    	System.out.println("FacilityDAO: *************** Query " + updateFacilityDetailQuery);
+	    	System.out.println("FacilityDAO: *************** Query " + updateFacilityDetailQuery + "\n");
 	    	  
 	   }	    
 	   catch (SQLException se) {
@@ -219,7 +219,7 @@ public class FacilityDAO {
 	    	String getAllFacilitiesQuery = "SELECT * FROM facility";
 
 	    	ResultSet facRS = st.executeQuery(getAllFacilitiesQuery);      
-	    	System.out.println("FacilityDAO: *************** Query " + getAllFacilitiesQuery);
+	    	System.out.println("FacilityDAO: *************** Query " + getAllFacilitiesQuery + "\n");
 	    	
 	    	Facility fac1 = new Facility();
 		    while ( facRS.next() ) {

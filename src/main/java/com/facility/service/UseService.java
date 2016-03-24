@@ -1,6 +1,7 @@
 package com.facility.service;
 
 import java.util.List;
+import java.time.*;
 
 import com.facility.dal.UseDAO;
 import com.facility.use.*;
@@ -12,6 +13,7 @@ public class UseService {
 	
 	/***
 	 * List all the inspections at a particular facility.
+	 * Uses sample dummy data in database.
 	 * @param fac facility to search for inspections
 	 * @return a list of inspections
 	 */
@@ -24,6 +26,65 @@ public class UseService {
 	    }
 		
 		return null;
+	}
+	
+	/***
+	 * Checks if a particular room at a facility is in use during an interval.
+	 * Enter 0 for room number if checking the entire facility.
+	 * @param fac Facility to be checked
+	 * @param roomNumber room number to be checked (0 if entire facility)
+	 * @param startDate
+	 * @param endDate
+	 * @return true if facility/room is in use, otherwise false
+	 */
+	public boolean isInUseDuringInterval(Facility fac, int roomNumber, LocalDate startDate, LocalDate endDate) {
+		//ensures the start and end data are valid and room number exists
+		if (startDate.isAfter(endDate)) {
+			System.out.println("Start date must be before end date.");
+		} else if (roomNumber > fac.getDetailsAboutFacility().getNumberOfRooms()) {
+			System.out.println("Invalid room number. There are only " + 
+					fac.getDetailsAboutFacility().getNumberOfRooms() + 
+					" rooms at this facility.");
+		} else {
+			try {
+				return useDAO.isInUseDuringInterval(fac, roomNumber, startDate, endDate);
+		    } catch (Exception se) {
+		      System.err.println("UseService: Threw an Exception checking if facility is in use during interval.");
+		      System.err.println(se.getMessage());
+		    }
+		}
+		
+		return true;
+	}
+	
+	/***
+	 * Assigns a facility and room number to use from a particular start date to a particular end date.
+	 * Enter room number 0 if assigning entire facility to use.
+	 * @param fac facility being assigned to use
+	 * @param roomNumber room number being assigned to use (0 if assigning entire facility)
+	 * @param startDate beginning date of use
+	 * @param endDate ending date of use
+	 */
+	public void assignFacilityToUse(Facility fac, int roomNumber, LocalDate startDate, LocalDate endDate) {
+		
+		//ensures the start and end data are valid, room number exists, and room isn't already in use at that time
+		if (startDate.isAfter(endDate)) {
+			System.out.println("Start date must be before end date.");
+		} else if (roomNumber > fac.getDetailsAboutFacility().getNumberOfRooms()) {
+			System.out.println("Invalid room number. There are only " + 
+					fac.getDetailsAboutFacility().getNumberOfRooms() + 
+					" rooms at this facility.");
+		} else if (isInUseDuringInterval(fac, roomNumber, startDate, endDate)) {
+			System.out.println("This room at the facility is already in use during this interval.");
+		} else {
+			try {
+				useDAO.assignFacilityToUse(fac, roomNumber, startDate, endDate);
+		    } catch (Exception se) {
+		      System.err.println("UseService: Threw an Exception assigning a facility to use.");
+		      System.err.println(se.getMessage());
+		    }
+		}
+		
 	}
 	
 }

@@ -11,7 +11,7 @@ public class DBHelper {
 	@SuppressWarnings("unused")
 	public static Connection getConnection() {
 		 
-		System.out.println("DBHelper: -------- PostgreSQL " + "JDBC Connection  ------------");
+		System.out.println("\nDBHelper: -------- PostgreSQL " + "JDBC Connection  ------------");
  
 		try {
  
