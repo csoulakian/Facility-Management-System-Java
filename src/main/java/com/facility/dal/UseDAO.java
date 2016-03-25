@@ -42,12 +42,16 @@ public class UseDAO {
 		    	inspec.setFacility_ID(fac.getFacilityID());
 		    	listOfInspec.add(inspec);
 		    }
+		    
+		    //close to manage resources
+		    useRS.close();
+		    st.close();
 	    	  
 	   }	    
 	   catch (SQLException se) {
-	      System.err.println("UseDAO: Threw a SQLException retreiving inspections from Inspections table.");
-	      System.err.println(se.getMessage());
-	      se.printStackTrace();
+		   System.err.println("UseDAO: Threw a SQLException retreiving inspections from Inspections table.");
+		   System.err.println(se.getMessage());
+		   se.printStackTrace();
 	   }
 		
 		return listOfInspec;
@@ -87,6 +91,10 @@ public class UseDAO {
 	    		}
 	    	}
 	    	
+	    	//close to manage resources
+	    	useRS.close();
+	    	st.close();
+	    	
         }
         catch (SQLException se) {
         	System.err.println("UseDAO: Threw a SQLException checking if facility is in use during an interval.");
@@ -124,6 +132,10 @@ public class UseDAO {
             usePst.setDate(4, Date.valueOf(facUse.getEndDate()));
             usePst.executeUpdate();
             System.out.println("UseDAO: *************** Query " + usePst + "\n");
+            
+            //close to manage resources
+            usePst.close();
+            con.close();
         }
         catch (SQLException se) {
         	System.err.println("UseDAO: Threw a SQLException assigning a facility to use in the use table.");
@@ -160,6 +172,9 @@ public class UseDAO {
 		    	listOfUsage.add(use);
 		    }
 		    
+		    //close to manage resources
+		    useRS.close();
+		    st.close();
 		    return listOfUsage;
 	    	  
 	    }	    
@@ -172,7 +187,5 @@ public class UseDAO {
 		return null;
 		
 	}
-	
-	
 	
 }

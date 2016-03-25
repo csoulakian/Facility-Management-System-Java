@@ -27,7 +27,8 @@ public class FacilityDAO {
             st.execute(removeFacilityUseQuery);
     
 	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityUseQuery + "\n");
-	      		  
+	    	//close to manage resources
+	    	st.close();
 	    }	    
 	    catch (SQLException se) {
 	    	System.err.println("FacilityDAO: Threw a SQLException removing the Facility from Use table.");
@@ -42,7 +43,8 @@ public class FacilityDAO {
             st.execute(removeFacilityDetailQuery);
     
 	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityDetailQuery + "\n");
-	      		  
+	    	//close to manage resources
+	    	st.close(); 
 	    }	    
 	    catch (SQLException se) {
 	    	System.err.println("FacilityDAO: Threw a SQLException removing the Facility Detail from Facility Detail table.");
@@ -57,7 +59,8 @@ public class FacilityDAO {
             st.execute(removeFacilityQuery);
 
 	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityQuery + "\n");
-	      	    		  
+	    	//close to manage resources
+	    	st.close();		  
 	    }	    
 	    catch (SQLException se) {
 	    	System.err.println("FacilityDAO: Threw a SQLException removing the Facility object from Facility table.");
@@ -109,6 +112,7 @@ public class FacilityDAO {
 		    }
 		      
 		    fac1.setDetailsAboutFacility(detail);
+		    
 		    //close to manage resources
 		    detRS.close();
 		    st.close();
@@ -194,6 +198,10 @@ public class FacilityDAO {
             facPst.executeUpdate();
     
 	    	System.out.println("FacilityDAO: *************** Query " + updateFacilityDetailQuery + "\n");
+	    	
+	    	//close to manage resources
+	    	facPst.close();
+	    	con.close();
 	    	  
 	   }	    
 	   catch (SQLException se) {
@@ -228,6 +236,7 @@ public class FacilityDAO {
 		    
 		    //close to manage resources
 		    facRS.close();
+		    st.close();
 	    	
 		}
     	catch (SQLException se) {
