@@ -103,4 +103,38 @@ public class UseService {
 		return null;
 	}
 	
+	/***
+	 * Calculates the current usage rate of a particular facility.
+	 * @param fac Facility to calculate the usage rate of
+	 * @return number of rooms currently being used divided by the total number of rooms at a facility
+	 */
+	public double calcUsageRate(Facility fac) {
+		
+		try {
+			
+			List<FacilityUse> usage = useDAO.listActualUsage(fac);
+			int roomsInUse = 0;
+			if (usage.size() > 0) {
+				for (FacilityUse facUse : usage) {
+					if ((LocalDate.now().equals(facUse.getStartDate()) || LocalDate.now().isAfter(facUse.getStartDate())) &
+							LocalDate.now().equals(facUse.getEndDate()) || LocalDate.now().isBefore(facUse.getEndDate())) {
+						if (facUse.getRoomNumber() == 0) {
+							return 1.00;
+						} else {
+							roomsInUse = roomsInUse + 1;
+						}
+					}
+				}
+			}
+			
+			return Math.round(((double)roomsInUse / fac.getDetailsAboutFacility().getNumberOfRooms()) * 100d)/100d;
+			
+	    } catch (Exception se) {
+	      System.err.println("UseService: Threw an Exception retrieving list of usage for calculating the usage rate.");
+	      System.err.println(se.getMessage());
+	    }
+		
+		return 0.00;
+	}
+	
 }

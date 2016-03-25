@@ -15,58 +15,57 @@ public class FacilityDAO {
 	public FacilityDAO() {}
 	
 	/***
-	 * Removes facility from the facility table and facility_detail table.
+	 * Removes facility from the facility table, facility_detail table, and use table.
 	 * @param ID of facility to be removed
 	 */
 	public void removeFacility(int ID) {
 		
 	    try { 		
-	    	Connection con = DBHelper.getConnection();
-			PreparedStatement facPst = null;
-	    	//Get Facility
-	        
-	    	String removeFacilityQuery = "delete from facility where id = '" + ID + "'";
-	    
-            facPst = con.prepareStatement(removeFacilityQuery);
-           // facPst.setInt(1, fac.getFacilityID());
-            facPst.executeUpdate();
+	    	//remove from use table
+		    Statement st = DBHelper.getConnection().createStatement();
+	    	String removeFacilityUseQuery = "delete from use where facility_id = '" + ID + "'";
+            st.execute(removeFacilityUseQuery);
     
-	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityQuery + "\n");
-	    
-	      //close to manage resources
-	      //facRS.close();
-	      	    		  
-	   }	    
-	   catch (SQLException se) {
-	      System.err.println("FacilityDAO: Threw a SQLException removing the Facility object from Facility table.");
-	      System.err.println(se.getMessage());
-	      se.printStackTrace();
-	   }
-	 	 
-	   try { 		
-	    	//Get Facility
-	    	Connection con = DBHelper.getConnection();
-			 PreparedStatement facPst = null;
-	        
+	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityUseQuery + "\n");
+	      		  
+	    }	    
+	    catch (SQLException se) {
+	    	System.err.println("FacilityDAO: Threw a SQLException removing the Facility from Use table.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
+	    }
+		
+	    try { 		
+	    	//remove from facility_detail table
+		    Statement st = DBHelper.getConnection().createStatement();
 	    	String removeFacilityDetailQuery = "delete from facility_detail where facility_id = '" + ID + "'";
-	    
-            facPst = con.prepareStatement(removeFacilityDetailQuery);
-           // facPst.setInt(1, fac.getFacilityID());
-            facPst.executeUpdate();
+            st.execute(removeFacilityDetailQuery);
     
 	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityDetailQuery + "\n");
-	    
-	      //close to manage resources
-	      //facRS.close();
-	      	    		  
-	   }	    
-	   catch (SQLException se) {
-	      System.err.println("FacilityDAO: Threw a SQLException removing the Facility Detail from Facility Detail table.");
-	      System.err.println(se.getMessage());
-	      se.printStackTrace();
+	      		  
+	    }	    
+	    catch (SQLException se) {
+	    	System.err.println("FacilityDAO: Threw a SQLException removing the Facility Detail from Facility Detail table.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
 	    }
 	    
-	  }
+	    try {
+	    	//remove from facility table
+	    	Statement st = DBHelper.getConnection().createStatement();
+	    	String removeFacilityQuery = "delete from facility where id = '" + ID + "'";
+            st.execute(removeFacilityQuery);
+
+	    	System.out.println("FacilityDAO: *************** Query " + removeFacilityQuery + "\n");
+	      	    		  
+	    }	    
+	    catch (SQLException se) {
+	    	System.err.println("FacilityDAO: Threw a SQLException removing the Facility object from Facility table.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
+	    }
+	 	
+	}
 	
 	/***
 	 * Returns detail information about a facility, including its name, facility ID, number of rooms, 

@@ -159,6 +159,8 @@ public class UseDAO {
 		    	use.setEndDate(useRS.getDate("end_date").toLocalDate());
 		    	listOfUsage.add(use);
 		    }
+		    
+		    return listOfUsage;
 	    	  
 	    }	    
 	    catch (SQLException se) {
@@ -167,10 +169,10 @@ public class UseDAO {
 	    	se.printStackTrace();
 	    }
 		
-		
-		return listOfUsage;
+		return null;
 		
 	}
+	
 	
 	
 }
