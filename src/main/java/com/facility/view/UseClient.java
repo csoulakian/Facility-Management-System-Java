@@ -1,6 +1,7 @@
 package com.facility.view;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.facility.base.*;
 import com.facility.service.UseService;
@@ -73,6 +74,27 @@ public class UseClient {
 		}
 		System.out.print("in use from " + factUse.getStartDate() + " to " + factUse.getEndDate() + ".");
 		
+		
+		//list actual usage that has been assigned to a particular facility
+		System.out.println("\nUseClient: ************ Listing the usage at a facility ***************");
+		
+		//uses sample dummy data of usage in database
+		Facility fac = new Facility();
+		fac.setFacilityID(1);
+		List<FacilityUse> usageList = useService.listActualUsage(fac);
+		Object[][] usage = new Object[usageList.size() + 1][3];
+		usage[0] = new Object[] {"Room #", "Start Date", "End Date"};
+		for (int i = 1; i <= usageList.size(); i++) {
+			usage[i] = new Object[] {usageList.get(i-1).getRoomNumber(), usageList.get(i-1).getStartDate().toString(), 
+					usageList.get(i-1).getEndDate().toString()};
+			if ((int) usage[i][0] == 0) {
+				usage[i][0] = "all";
+			}
+		}
+		System.out.println("\nUsage at Facility #" + fac.getFacilityID());
+		for (Object[] row : usage) {
+			System.out.format("\t%-10s%-15s%-15s\n", row);
+		}
 		
 	}
 	

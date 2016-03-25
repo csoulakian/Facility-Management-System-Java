@@ -87,4 +87,20 @@ public class UseService {
 		
 	}
 	
+	/***
+	 * Lists the usage assignments at a particular facility first by room number and then by date.
+	 * @param fac Facility to list the usage assignments for
+	 * @return a list of FacilityUse objects containing a room number, start date, and end date.
+	 */
+	public List<FacilityUse> listActualUsage(Facility fac) {
+		try {
+			return useDAO.listActualUsage(fac);
+	    } catch (Exception se) {
+	      System.err.println("UseService: Threw an Exception retrieving list of usage.");
+	      System.err.println(se.getMessage());
+	    }
+		
+		return null;
+	}
+	
 }
