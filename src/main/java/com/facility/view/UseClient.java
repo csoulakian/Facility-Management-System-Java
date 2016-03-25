@@ -55,7 +55,6 @@ public class UseClient {
 		factUse.setFacilityID(12);
 		FacilityDetail factDet = new FacilityDetail();
 		factDet.setNumberOfRooms(6);
-		factDet.setFacilityID(12);
 		factDet.setName("Test Facility");
 		factUse.setDetailsAboutFacility(factDet);
 		facilityService.addNewFacility(factUse);

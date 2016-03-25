@@ -1,11 +1,8 @@
 package com.facility.base;
 
-//TODO make FacilityDetail extend Facility, remove extra facilityID methods and implementations in FacilityDAO, Service, and Client
-
-public class FacilityDetail {
+public class FacilityDetail extends Facility {
 
 	private String name;
-	private int facilityID;
 	private int numberOfRooms;
 	private int phoneNumber;
 	
@@ -15,14 +12,6 @@ public class FacilityDetail {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getFacilityID() {
-		return facilityID;
-	}
-
-	public void setFacilityID(int facilityID) {
-		this.facilityID = facilityID;
 	}
 
 	public int getNumberOfRooms() {

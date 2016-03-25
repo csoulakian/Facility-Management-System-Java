@@ -80,22 +80,10 @@ public class FacilityDAO {
 	 	 
 	    try {
 	    	
-	    	//Get Facility
-    		Statement st = DBHelper.getConnection().createStatement();
-	    	String selectFacilityQuery = "SELECT id from facility where id = '" + ID + "'";
-
-	    	ResultSet facRS = st.executeQuery(selectFacilityQuery);      
-	    	System.out.println("FacilityDAO: *************** Query " + selectFacilityQuery + "\n");
-	    	
 	    	Facility fac1 = new Facility();
-		    while ( facRS.next() ) {
-		    	fac1.setFacilityID(facRS.getInt("id"));
-		    }
-		    
-		    //close to manage resources
-		    facRS.close();
 		      	    		  
-		    //Get Address
+		    //Get details about facility
+	    	Statement st = DBHelper.getConnection().createStatement();
 		    String selectDetailQuery = "SELECT name,facility_id,number_of_rooms,phone FROM facility_detail WHERE facility_id = '" + ID + "'";
 		    ResultSet detRS = st.executeQuery(selectDetailQuery);
 	    	FacilityDetail detail = new FacilityDetail();
@@ -115,15 +103,14 @@ public class FacilityDAO {
 		    
 		    //close to manage resources
 		    detRS.close();
-		    st.close();
 		      
 		    return fac1;
 	    }
 	    
 	    catch (SQLException se) {
-	      System.err.println("FacilityDAO: Threw a SQLException retrieving the Facility object.");
-	      System.err.println(se.getMessage());
-	      se.printStackTrace();
+	    	System.err.println("FacilityDAO: Threw a SQLException retrieving the Facility object.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
 	    }
 	    
 	    return null;
