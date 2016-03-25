@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.facility.base.*;
 import com.facility.service.UseService;
+import com.facility.use.FacilityUse;
 import com.facility.use.Inspection;
 
 public class UseClient {
@@ -26,57 +27,51 @@ public class UseClient {
 		}
 		
 		//set up facility 12 to be checked if it's in use during an interval
-		Facility fact = new Facility();;
-		fact.setFacilityID(12);
+		FacilityUse factUse = new FacilityUse();;
+		factUse.setFacilityID(12);
 		FacilityDetail factDet = new FacilityDetail();
 		factDet.setNumberOfRooms(6);
-		fact.setDetailsAboutFacility(factDet);
-		LocalDate checkStart = LocalDate.of(2014, 12, 1);
-		LocalDate checkEnd = LocalDate.of(2014, 12, 7);
-		int checkRoom = 1;
+		factUse.setDetailsAboutFacility(factDet);
+		factUse.setStartDate(LocalDate.of(2014, 12, 1));
+		factUse.setEndDate(LocalDate.of(2014, 12, 7));
+		factUse.setRoomNumber(1);
 		
 		System.out.println("\nUseClient: ************ Checking if a facility is in use during an interval ***************");
 
-		boolean result = useService.isInUseDuringInterval(fact, checkRoom, checkStart, checkEnd);
+		boolean result = useService.isInUseDuringInterval(factUse);
 
-		System.out.print("\n\tFacility #" + fact.getFacilityID());
-		if (checkRoom != 0) {
-			System.out.print(" - Room " + checkRoom);
+		System.out.print("\n\tFacility #" + factUse.getFacilityID());
+		if (factUse.getRoomNumber() != 0) {
+			System.out.print(" - Room " + factUse.getRoomNumber());
 		}
 		if (result) {
 			System.out.print(" IS ");
 		} else {
 			System.out.print(" is NOT ");
 		}
-		System.out.print("in use from " + checkStart + " to " + checkEnd + ".");
+		System.out.print("in use from " + factUse.getStartDate() + " to " + factUse.getEndDate() + ".");
 		
-		
-		
-		//set up for assigning facility to use
-		LocalDate assignStart = LocalDate.of(2014, 12, 1);
-		LocalDate assignEnd = LocalDate.of(2014, 12, 7);
-		int useRoom = 1;
-		
+		//assign the facility to use during the previously checked room and start/end date
 		System.out.println("\nUseClient: ************ Assigning a facility to use ***************");
-		useService.assignFacilityToUse(fact, useRoom, assignStart, assignEnd);
+		useService.assignFacilityToUse(factUse);
 		System.out.println("\nUseClient: ************ Facility and room assigned ***************");
 		
-		
+		//re-check if facility is in use
 		System.out.println("\nUseClient: ************ Checking if a facility is in use during an interval ***************");
 
 		
-		boolean result2 = useService.isInUseDuringInterval(fact, useRoom, assignStart, assignEnd);
+		boolean result2 = useService.isInUseDuringInterval(factUse);
 
-		System.out.print("\n\tFacility #" + fact.getFacilityID());
-		if (useRoom != 0) {
-			System.out.print(" - Room " + useRoom);
+		System.out.print("\n\tFacility #" + factUse.getFacilityID());
+		if (factUse.getRoomNumber() != 0) {
+			System.out.print(" - Room " + factUse.getRoomNumber());
 		}
 		if (result2) {
 			System.out.print(" IS ");
 		} else {
 			System.out.print(" is NOT ");
 		}
-		System.out.print("in use from " + checkStart + " to " + checkEnd + ".");
+		System.out.print("in use from " + factUse.getStartDate() + " to " + factUse.getEndDate() + ".");
 		
 		
 	}

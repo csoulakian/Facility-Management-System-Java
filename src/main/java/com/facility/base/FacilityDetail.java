@@ -1,5 +1,6 @@
 package com.facility.base;
 
+//TODO make FacilityDetail extend Facility, remove extra facilityID methods and implementations in FacilityDAO, Service, and Client
 public class FacilityDetail {
 
 	private String name;

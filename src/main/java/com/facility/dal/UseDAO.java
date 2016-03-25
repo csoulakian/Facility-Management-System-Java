@@ -64,14 +64,14 @@ public class UseDAO {
 	 * @param endDate
 	 * @return true if facility/room is in use, otherwise false
 	 */
-	public boolean isInUseDuringInterval(Facility fac, int roomNumber, LocalDate startDate, LocalDate endDate) {
+	public boolean isInUseDuringInterval(FacilityUse facUse) {
 		
 		boolean result = false;
         try {
         	//Insert the facility ID, room number, and start/end dates into use table
             Statement st = DBHelper.getConnection().createStatement();
-	    	String selectUseAssignments = "SELECT * FROM use WHERE facility_id = " + fac.getFacilityID() + 
-	    			" AND room_number IN (0, " + roomNumber + ")";
+	    	String selectUseAssignments = "SELECT * FROM use WHERE facility_id = " + facUse.getFacilityID() + 
+	    			" AND room_number IN (0, " + facUse.getRoomNumber() + ")";
 
 	    	ResultSet useRS = st.executeQuery(selectUseAssignments);      
 	    	System.out.println("UseDAO: *************** Query " + selectUseAssignments + "\n");
@@ -80,7 +80,8 @@ public class UseDAO {
 	    	while (useRS.next()) {
 	    		LocalDate assignStart = useRS.getDate("start_date").toLocalDate();
 	    		LocalDate assignEnd = useRS.getDate("end_date").toLocalDate();
-	    		if (startDate.isBefore(assignEnd) && (assignStart.isBefore(endDate) || assignStart.equals(endDate))) {
+	    		if (facUse.getStartDate().isBefore(assignEnd) && (assignStart.isBefore(facUse.getEndDate()) || 
+	    				assignStart.equals(facUse.getEndDate()))) {
 	    			result = true;
 	    			break;
 	    		}
@@ -108,7 +109,7 @@ public class UseDAO {
 	 * @param startDate beginning date facility will be in use
 	 * @param endDate ending date facility will be in use
 	 */
-	public void assignFacilityToUse(Facility fac, int roomNumber, LocalDate startDate, LocalDate endDate) {
+	public void assignFacilityToUse(FacilityUse facUse) {
 		
 		Connection con = DBHelper.getConnection();
         PreparedStatement usePst = null;
@@ -117,10 +118,10 @@ public class UseDAO {
         	//Insert the facility ID, room number, and start/end dates into use table
             String useStm = "INSERT INTO use (facility_id, room_number, start_date, end_date) VALUES (?, ?, ?, ?)";
             usePst = con.prepareStatement(useStm);
-            usePst.setInt(1, fac.getFacilityID());
-            usePst.setInt(2, roomNumber);
-            usePst.setDate(3, Date.valueOf(startDate));
-            usePst.setDate(4, Date.valueOf(endDate));
+            usePst.setInt(1, facUse.getFacilityID());
+            usePst.setInt(2, facUse.getRoomNumber());
+            usePst.setDate(3, Date.valueOf(facUse.getStartDate()));
+            usePst.setDate(4, Date.valueOf(facUse.getEndDate()));
             usePst.executeUpdate();
             System.out.println("UseDAO: *************** Query " + usePst + "\n");
         }
@@ -131,5 +132,7 @@ public class UseDAO {
         }
 		
 	}
+	
+	
 	
 }

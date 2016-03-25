@@ -37,17 +37,17 @@ public class UseService {
 	 * @param endDate
 	 * @return true if facility/room is in use, otherwise false
 	 */
-	public boolean isInUseDuringInterval(Facility fac, int roomNumber, LocalDate startDate, LocalDate endDate) {
+	public boolean isInUseDuringInterval(FacilityUse facUse) {
 		//ensures the start and end data are valid and room number exists
-		if (startDate.isAfter(endDate)) {
+		if (facUse.getStartDate().isAfter(facUse.getEndDate())) {
 			System.out.println("Start date must be before end date.");
-		} else if (roomNumber > fac.getDetailsAboutFacility().getNumberOfRooms()) {
+		} else if (facUse.getRoomNumber() > facUse.getDetailsAboutFacility().getNumberOfRooms()) {
 			System.out.println("Invalid room number. There are only " + 
-					fac.getDetailsAboutFacility().getNumberOfRooms() + 
+					facUse.getDetailsAboutFacility().getNumberOfRooms() + 
 					" rooms at this facility.");
 		} else {
 			try {
-				return useDAO.isInUseDuringInterval(fac, roomNumber, startDate, endDate);
+				return useDAO.isInUseDuringInterval(facUse);
 		    } catch (Exception se) {
 		      System.err.println("UseService: Threw an Exception checking if facility is in use during interval.");
 		      System.err.println(se.getMessage());
@@ -65,20 +65,20 @@ public class UseService {
 	 * @param startDate beginning date of use
 	 * @param endDate ending date of use
 	 */
-	public void assignFacilityToUse(Facility fac, int roomNumber, LocalDate startDate, LocalDate endDate) {
+	public void assignFacilityToUse(FacilityUse facUse) {
 		
 		//ensures the start and end data are valid, room number exists, and room isn't already in use at that time
-		if (startDate.isAfter(endDate)) {
+		if (facUse.getStartDate().isAfter(facUse.getEndDate())) {
 			System.out.println("Start date must be before end date.");
-		} else if (roomNumber > fac.getDetailsAboutFacility().getNumberOfRooms()) {
+		} else if (facUse.getRoomNumber() > facUse.getDetailsAboutFacility().getNumberOfRooms()) {
 			System.out.println("Invalid room number. There are only " + 
-					fac.getDetailsAboutFacility().getNumberOfRooms() + 
+					facUse.getDetailsAboutFacility().getNumberOfRooms() + 
 					" rooms at this facility.");
-		} else if (isInUseDuringInterval(fac, roomNumber, startDate, endDate)) {
+		} else if (isInUseDuringInterval(facUse)) {
 			System.out.println("This room at the facility is already in use during this interval.");
 		} else {
 			try {
-				useDAO.assignFacilityToUse(fac, roomNumber, startDate, endDate);
+				useDAO.assignFacilityToUse(facUse);
 		    } catch (Exception se) {
 		      System.err.println("UseService: Threw an Exception assigning a facility to use.");
 		      System.err.println(se.getMessage());

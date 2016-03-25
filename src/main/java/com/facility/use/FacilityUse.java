@@ -1,26 +1,39 @@
 package com.facility.use;
 
+import java.time.LocalDate;
 
-public class FacilityUse {
+import com.facility.base.Facility;
+
+public class FacilityUse extends Facility {
 	
-	private int actualUsage;
-	private double usageRate;
+	private int roomNumber;
+	private LocalDate startDate;
+	private LocalDate endDate;
 
 	public FacilityUse() {}
 	
-	public int getActualUsage() {
-		return actualUsage;
+	public int getRoomNumber() {
+		return roomNumber;
 	}
 
-	public void setActualUsage(int actualUsage) {
-		this.actualUsage = actualUsage;
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 
-	public double getUsageRate() {
-		return usageRate;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setUsageRate(double usageRate) {
-		this.usageRate = usageRate;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
 }
