@@ -1,0 +1,39 @@
+-FACILITY TABLE-
+"id"
+---- 
+ 1
+ 3
+ 4
+ 7
+
+ 
+-FACILITY_DETAIL TABLE-
+     "name"      | "facility_id" | "number_of_rooms" | "phone"
+ --------------- | ------------- | ----------------- | -------
+"Library"        |       1       |         2         | 3120136
+"Office"         |       3       |         6         |  NULL
+"Student Center" |       4       |         5         | 1234567
+"Computer Lab"   |       7       |         10        |  NULL
+
+
+-INSPECTION TABLE-
+"inspection_id" | "facility_id" | "inspection_type" |       "inspection_detail"
+ -------------- | ------------- | ----------------- | --------------------------------
+       1        |       1       |    "lights"       | "lights functioning"
+       6        |       3       |    "electrical"   | "complies with safety standards"
+       5        |       4       |    "bathroom"     | "clean and functioning"
+       3        |       7       |    "carpet"       | "clean and free of stains"
+       4        |       7       |    "bathroom"     | "clean and functioning"
+
+
+-USE TABLE-
+"use_id" | "facility_id" | "room_number" | "start_date" | "end_date"
+ ------- | ------------- | ------------- | ------------ | -----------
+    16   |       1       |       0       | "2010-05-03" | "2014-05-03"
+    2    |       1       |       1       | "2015-04-05" | "2018-04-05"
+    1    |       1       |       2       | "2006-03-21" | "2009-01-25"
+    3    |       3       |       1       | "2015-05-29" | "2019-07-03"
+    4    |       3       |       6       | "2015-05-29" | "2019-07-03"
+    5    |       4       |       0       | "2013-12-07" | "2014-12-07"
+    7    |       7       |       3       | "2006-03-21" | "2009-01-21"
+    6    |       7       |       3       | "2016-02-01" | "2017-12-31"
