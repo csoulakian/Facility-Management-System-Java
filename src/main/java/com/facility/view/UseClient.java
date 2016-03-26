@@ -102,8 +102,10 @@ public class UseClient {
 		//remove this new facility 12 for next time UseClient is run
 		facilityService.removeFacility(12);
 		
+
+		
 		//list actual usage that has been assigned to a particular facility
-		System.out.println("\nUseClient: ************ Listing the usage at a facility ***************");
+		System.out.println("\nUseClient: ************ Listing the usage at a facility before being vacated***************");
 		
 		//uses sample dummy data of usage in database
 		List<FacilityUse> usageList = useService.listActualUsage(fact3);
@@ -121,10 +123,39 @@ public class UseClient {
 			System.out.format("\t%-10s%-15s%-15s\n", row);
 		}
 		
+		System.out.println("\nUseClient: ************ Vacate a facility  ***************");
+		useService.vacateFacility(fact3, 6);
+		System.out.println("\nUseClient: ************ Facility vacated  ***************");
+		
+		//list actual usage that has been assigned to a particular facility
+		System.out.println("\nUseClient: ************ Listing the usage at a facility after being vacated***************");
+		
+		//uses sample dummy data of usage in database
+		List<FacilityUse> usageList2 = useService.listActualUsage(fact3);
+		Object[][] usage2 = new Object[usageList2.size() + 1][3];
+		usage2[0] = new Object[] {"Room #", "Start Date", "End Date"};
+		for (int i = 1; i <= usageList2.size(); i++) {
+			usage2[i] = new Object[] {usageList2.get(i-1).getRoomNumber(), usageList2.get(i-1).getStartDate().toString(), 
+					usageList2.get(i-1).getEndDate().toString()};
+			if ((int) usage2[i][0] == 0) {
+				usage2[i][0] = "all";
+			}
+		}
+		System.out.println("Usage at Facility #" + fact3.getFacilityID());
+		for (Object[] row : usage2) {
+			System.out.format("\t%-10s%-15s%-15s\n", row);
+		}
+		
+		
+		
 		//calculate current usage rate of a facility
 		System.out.println("\nUseClient: ************ Calculating the current usage rate at a facility ***************");
 		int usageRate = (int) (useService.calcUsageRate(fact3) * 100);
 		System.out.println("Current usage at Facility #" + fact3.getFacilityID() + " is " + usageRate + "%.");
+		
+		
+
+		
 	}
 	
 	

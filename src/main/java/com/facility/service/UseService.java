@@ -116,6 +116,7 @@ public class UseService {
 			int roomsInUse = 0;
 			if (usage.size() > 0) {
 				for (FacilityUse facUse : usage) {
+					//if currently in use
 					if ((LocalDate.now().equals(facUse.getStartDate()) || LocalDate.now().isAfter(facUse.getStartDate())) &
 							LocalDate.now().equals(facUse.getEndDate()) || LocalDate.now().isBefore(facUse.getEndDate())) {
 						if (facUse.getRoomNumber() == 0) {
@@ -136,5 +137,63 @@ public class UseService {
 		
 		return 0.00;
 	}
+	
+	public void vacateFacility(Facility fac, int roomNumber) {
+		
+		try {
+			List<FacilityUse> usageList = listActualUsage(fac);
+			if (roomNumber > fac.getDetailsAboutFacility().getNumberOfRooms()) {
+				System.out.println("Invalid room number. There are only " + 
+						fac.getDetailsAboutFacility().getNumberOfRooms() + " rooms at this facility.");
+			} else {
+				for (FacilityUse use : usageList) {
+					//if room number matches usage list (or usage list entry is for entire facility) 
+					//and room is currently in use, set vacateQuery
+					if (use.getRoomNumber() == 0 || (use.getRoomNumber() == roomNumber))  {
+						if ((LocalDate.now().equals(use.getStartDate())) || LocalDate.now().isAfter(use.getStartDate())) {
+							if ((LocalDate.now().equals(use.getEndDate())) || (LocalDate.now().isBefore(use.getEndDate()))) {
+								useDAO.vacateFacility(fac, roomNumber);
+							}
+						} else {
+							System.out.println("This room is not currently in use. Unable to vacate at this time.");
+						}
+					}
+				}
+			}
+		}
+		catch (Exception se) {
+			System.err.println("UseService: Threw an Exception vacating a facility.");
+		    System.err.println(se.getMessage());
+		}
+		
+	}
+	
+	
+/*	public void vacateFacility(Facility fac, int roomNumber) {
+		
+
+		List<FacilityUse> usageList = listActualUsage(fac);
+		if (roomNumber > fac.getDetailsAboutFacility().getNumberOfRooms()) {
+			System.out.println("Invalid room number. There are only " + 
+					fac.getDetailsAboutFacility().getNumberOfRooms() + " rooms at this facility.");
+		} else {
+			for (FacilityUse use : usageList) {
+				//if room number matches usage list (or usage list entry is for entire facility) 
+				//and room is currently in use, set vacateQuery
+				if (use.getRoomNumber() == 0 || (use.getRoomNumber() == roomNumber))  {
+					if ((LocalDate.now().equals(use.getStartDate())) || LocalDate.now().isAfter(use.getStartDate())) {
+						if ((LocalDate.now().equals(use.getEndDate())) || (LocalDate.now().isBefore(use.getEndDate()))) {
+							useDAO.vacateFacility(fac, roomNumber);
+						} else System.out.println(1);
+					} else System.out.println(2);
+				} else {
+					//System.out.println("This room is not currently in use. Unable to vacate at this time.");
+					System.out.println(3);
+				}
+			}
+		}
+
+		
+	}*/
 	
 }
