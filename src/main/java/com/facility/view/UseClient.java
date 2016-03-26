@@ -56,10 +56,11 @@ public class UseClient {
 		FacilityDetail factDet = new FacilityDetail();
 		factDet.setNumberOfRooms(6);
 		factDet.setName("Test Facility");
+		factDet.setFacilityID(12);
 		factUse.setDetailsAboutFacility(factDet);
 		facilityService.addNewFacility(factUse);
-		factUse.setStartDate(LocalDate.of(2014, 12, 1));
-		factUse.setEndDate(LocalDate.of(2014, 12, 7));
+		factUse.setStartDate(LocalDate.of(2015, 12, 1));
+		factUse.setEndDate(LocalDate.of(2017, 12, 1));
 		factUse.setRoomNumber(1);
 		
 		System.out.println("\nUseClient: ************ Checking if a facility is in use during an interval ***************");
@@ -99,16 +100,12 @@ public class UseClient {
 		}
 		System.out.print("in use from " + factUse.getStartDate() + " to " + factUse.getEndDate() + ".\n");
 		
-		//remove this new facility 12 for next time UseClient is run
-		facilityService.removeFacility(12);
-		
 
-		
 		//list actual usage that has been assigned to a particular facility
 		System.out.println("\nUseClient: ************ Listing the usage at a facility before being vacated***************");
 		
 		//uses sample dummy data of usage in database
-		List<FacilityUse> usageList = useService.listActualUsage(fact3);
+		List<FacilityUse> usageList = useService.listActualUsage(factUse);
 		Object[][] usage = new Object[usageList.size() + 1][3];
 		usage[0] = new Object[] {"Room #", "Start Date", "End Date"};
 		for (int i = 1; i <= usageList.size(); i++) {
@@ -118,20 +115,20 @@ public class UseClient {
 				usage[i][0] = "all";
 			}
 		}
-		System.out.println("Usage at Facility #" + fact3.getFacilityID());
+		System.out.println("Usage at Facility #" + factUse.getFacilityID());
 		for (Object[] row : usage) {
 			System.out.format("\t%-10s%-15s%-15s\n", row);
 		}
 		
 		System.out.println("\nUseClient: ************ Vacate a facility  ***************");
-		useService.vacateFacility(fact3, 6);
+		useService.vacateFacility(factUse, 1);
 		System.out.println("\nUseClient: ************ Facility vacated  ***************");
 		
 		//list actual usage that has been assigned to a particular facility
 		System.out.println("\nUseClient: ************ Listing the usage at a facility after being vacated***************");
 		
 		//uses sample dummy data of usage in database
-		List<FacilityUse> usageList2 = useService.listActualUsage(fact3);
+		List<FacilityUse> usageList2 = useService.listActualUsage(factUse);
 		Object[][] usage2 = new Object[usageList2.size() + 1][3];
 		usage2[0] = new Object[] {"Room #", "Start Date", "End Date"};
 		for (int i = 1; i <= usageList2.size(); i++) {
@@ -141,7 +138,7 @@ public class UseClient {
 				usage2[i][0] = "all";
 			}
 		}
-		System.out.println("Usage at Facility #" + fact3.getFacilityID());
+		System.out.println("Usage at Facility #" + factUse.getFacilityID());
 		for (Object[] row : usage2) {
 			System.out.format("\t%-10s%-15s%-15s\n", row);
 		}
@@ -154,6 +151,8 @@ public class UseClient {
 		System.out.println("Current usage at Facility #" + fact3.getFacilityID() + " is " + usageRate + "%.");
 		
 		
+		//remove this new facility 12 for next time UseClient is run
+		facilityService.removeFacility(12);
 
 		
 	}
