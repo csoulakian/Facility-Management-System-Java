@@ -1,7 +1,10 @@
 package com.facility.service;
 
 import com.facility.dal.FacilityDAO;
+import com.facility.dal.UseDAO;
+import com.facility.use.FacilityUse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.facility.base.Facility;
@@ -9,6 +12,7 @@ import com.facility.base.Facility;
 public class FacilityService {
 	
 	private FacilityDAO facDAO = new FacilityDAO();
+	private UseDAO useDAO = new UseDAO();
 	
 	//Insert a new facility in the DB
 	public void addNewFacility(Facility facility) {
@@ -60,5 +64,35 @@ public class FacilityService {
 	    }
 		
 		return null;
+	}
+	
+	public int requestAvailableCapacity(Facility fac) {
+		
+		try {
+			
+			List<FacilityUse> usage = useDAO.listActualUsage(fac);
+			int roomsInUse = 0;
+			if (usage.size() > 0) {
+				for (FacilityUse facUse : usage) {
+					//if currently in use
+					if ((LocalDate.now().equals(facUse.getStartDate()) || LocalDate.now().isAfter(facUse.getStartDate())) &
+							LocalDate.now().equals(facUse.getEndDate()) || LocalDate.now().isBefore(facUse.getEndDate())) {
+						if (facUse.getRoomNumber() == 0) {
+							return 0;
+						} else {
+							roomsInUse = roomsInUse + 1;
+						}
+					}
+				}
+			}
+			
+			return fac.getDetailsAboutFacility().getNumberOfRooms() - roomsInUse;
+			
+	    } catch (Exception se) {
+	      System.err.println("UseService: Threw an Exception requesting the available capacity of a facility.");
+	      System.err.println(se.getMessage());
+	    }
+		
+		return 0;
 	}
 }

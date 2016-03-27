@@ -239,10 +239,4 @@ public class FacilityDAO {
 	    	
 	}
 	
-	public int requestAvailableCapacity(Facility fac) {
-		
-		
-		return 0;
-	}
-	
 }

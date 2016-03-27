@@ -11,8 +11,8 @@ public class Client {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 		
-		FacilityClient facilityClient = new FacilityClient();
-		//UseClient useClient = new UseClient();
+		//FacilityClient facilityClient = new FacilityClient();
+		UseClient useClient = new UseClient();
 
 	}
 

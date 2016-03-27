@@ -86,7 +86,6 @@ public class UseClient {
 		//re-check if facility is in use
 		System.out.println("\nUseClient: ************ Checking if a facility is in use during an interval ***************");
 
-		
 		boolean result2 = useService.isInUseDuringInterval(factUse);
 
 		System.out.print("\tFacility #" + factUse.getFacilityID());
