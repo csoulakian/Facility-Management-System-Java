@@ -81,6 +81,7 @@ public class FacilityDAO {
 	    try {
 	    	
 	    	Facility fac1 = new Facility();
+	    	fac1.setFacilityID(ID);
 		      	    		  
 		    //Get details about facility
 	    	Statement st = DBHelper.getConnection().createStatement();
@@ -224,15 +225,17 @@ public class FacilityDAO {
 		    //close to manage resources
 		    facRS.close();
 		    st.close();
+		    
+		    return listOfFac;
 	    	
 		}
     	catch (SQLException se) {
   	      System.err.println("FacilityDAO: Threw a SQLException retrieving list of facilities.");
   	      System.err.println(se.getMessage());
   	      se.printStackTrace();
-  	   }
+  	    }
 	    	
-		return listOfFac;
+		return null;
 	    	
 	}
 	

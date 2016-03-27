@@ -9,15 +9,16 @@ import com.facility.service.*;
 public class FacilityClient {
 
 	public FacilityClient() throws Exception {
+		
 		FacilityService facService = new FacilityService();
 		
 		System.out.println("\nFacilityClient: *************** Instantiating a facility and its details *************************");
         Facility fact = new Facility();;
-		fact.setFacilityID(1);
+		fact.setFacilityID(11);
 		FacilityDetail detail = new FacilityDetail();
-		detail.setFacilityID(1);
-		detail.setName("Library");
-		detail.setNumberOfRooms(2);
+		detail.setFacilityID(11);
+		detail.setName("IT Center");
+		detail.setNumberOfRooms(4);
 		//detail.setPhoneNumber(5550123);
         fact.setDetailsAboutFacility(detail);
       
@@ -26,10 +27,9 @@ public class FacilityClient {
         facService.addNewFacility(fact);
         System.out.println("FacilityClient: *************** Facility is inserted in Facility Database *************************");
 		
-        System.out.println("FacilityClient: *************** Trying to search facility in the database *************************");
+        System.out.println("FacilityClient: *************** Trying to get information about this facility in the database ***************");
         
- 
-        Facility searchedFacility = facService.getFacilityInformation(1); 
+        Facility searchedFacility = facService.getFacilityInformation(11); 
         
         System.out.println("\nFacilityInformation: *************** Here is searched facility information *************************");
         System.out.println("\n\tFacility ID:   \t\t" + searchedFacility.getFacilityID());
@@ -46,9 +46,9 @@ public class FacilityClient {
         		
         
         //add optional phone number to facility detail
-		facService.addFacilityDetail(1, 3120136);
+		facService.addFacilityDetail(11, 3120136);
 		
-		Facility updatedFacility = facService.getFacilityInformation(1); 
+		Facility updatedFacility = facService.getFacilityInformation(11); 
 		FacilityDetail facilityNewDet = updatedFacility.getDetailsAboutFacility();
 		
 		System.out.println("\nFacilityInformation: *************** Here is the updated facility information *************************");
@@ -64,16 +64,17 @@ public class FacilityClient {
         }
 		
         
-        System.out.println("\nFacilityInformation: *************** Here is the list of facilities *************************");
+		System.out.println("\nFacilityInformation: *************** Remove a facility from the database *************************");
+        facService.removeFacility(11);
+        System.out.println("************ Facility Removed ************");
+        
+        System.out.println("\nFacilityInformation: *************** An updated list of all the facilities *************************");
         List<Facility> listOfFacilities = facService.listFacilities();
         for (Facility fac : listOfFacilities) {
         	FacilityDetail facDet = fac.getDetailsAboutFacility();
         	System.out.println("\n\t" + facDet.getName() + " ID: " + fac.getFacilityID());
         }
         
-          
-         /*System.out.println("Remove Facility"); 
-         facService.removeFacility(3);
-         System.out.println("Facility Removed");*/
+        
 	}
 }
