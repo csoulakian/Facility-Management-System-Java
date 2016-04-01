@@ -1,35 +1,26 @@
 package com.facility.maintenance;
 
-import java.util.List;
+import com.facility.base.Facility;
 
-public class Maintenance {
+public class Maintenance extends Facility {
 	
-	private int totalCost = 0;
-	private boolean maintenanceAvailable;
-	private List<MaintRequest> listOfMaintRequests;
+	private String details;
+	private int cost;
 	
-	public Maintenance() {
-		setMaintenanceAvailable(true);
+	public String getDetails() {
+		return details;
 	}
 	
-	public void makeFacilityMaintRequest(int maintID, int cost) {
-		MaintRequest request = new MaintRequest(maintID, cost);
-		listOfMaintRequests.add(request);
+	public void setDetails(String details) {
+		this.details = details;
 	}
 	
-	public List<MaintRequest> listMaintRequests() {
-		return listOfMaintRequests;
+	public int getCost() {
+		return cost;
 	}
 	
-	public int calcMaintenanceCostForFacility() {
-		return totalCost;
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 	
-	public void setMaintenanceAvailable(boolean status) {
-		maintenanceAvailable = status;
-	}
-	
-	public boolean getMaintenanceAvailable() {
-		return maintenanceAvailable;
-	}
 }
