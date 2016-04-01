@@ -6,7 +6,6 @@
  4
  7
 
- 
 -FACILITY_DETAIL TABLE-
      "name"      | "facility_id" | "number_of_rooms" | "phone"
  --------------- | ------------- | ----------------- | -------
@@ -14,7 +13,6 @@
 "Office"         |       3       |         6         |  NULL
 "Student Center" |       4       |         5         | 1234567
 "Computer Lab"   |       7       |        10         |  NULL
-
 
 -INSPECTION TABLE-
 "inspection_id" | "facility_id" | "inspection_type" |       "inspection_detail"
@@ -24,7 +22,6 @@
        5        |       4       |    "bathroom"     | "clean and functioning"
        3        |       7       |    "carpet"       | "clean and free of stains"
        4        |       7       |    "bathroom"     | "clean and functioning"
-
 
 -USE TABLE-
 "use_id" | "facility_id" | "room_number" | "start_date" | "end_date"
@@ -37,7 +34,7 @@
     5    |       4       |       0       | "2013-12-07" | "2014-12-07"
     7    |       7       |       3       | "2006-03-21" | "2009-01-21"
     6    |       7       |       3       | "2016-02-01" | "2017-12-31"
-	
+
 -MAINTENANCE TABLE-
 "maintenance_id" | "facility_id" |        "details"        |  "cost"
  --------------- | ------------- | ----------------------- | --------
@@ -48,7 +45,7 @@
         6        |       4       |  "new refrigerator"     |    500
         3        |       7       |  "repair door lock"     |     15
         2        |       7       |  "change light bulbs"   |     25
-		
+
 -MAINT_REQUEST TABLE-
 "maint_request_id" | "facility_id" |          "details"            |  "cost"
  ----------------- | ------------- | ----------------------------- | --------
