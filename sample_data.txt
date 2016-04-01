@@ -13,7 +13,7 @@
 "Library"        |       1       |         2         | 3120136
 "Office"         |       3       |         6         |  NULL
 "Student Center" |       4       |         5         | 1234567
-"Computer Lab"   |       7       |         10        |  NULL
+"Computer Lab"   |       7       |        10         |  NULL
 
 
 -INSPECTION TABLE-
@@ -29,7 +29,7 @@
 -USE TABLE-
 "use_id" | "facility_id" | "room_number" | "start_date" | "end_date"
  ------- | ------------- | ------------- | ------------ | -----------
-    16   |       1       |       0       | "2010-05-03" | "2014-05-03"
+   16    |       1       |       0       | "2010-05-03" | "2014-05-03"
     2    |       1       |       1       | "2015-04-05" | "2018-04-05"
     1    |       1       |       2       | "2006-03-21" | "2009-01-25"
     3    |       3       |       1       | "2015-05-29" | "2019-07-03"
@@ -37,3 +37,25 @@
     5    |       4       |       0       | "2013-12-07" | "2014-12-07"
     7    |       7       |       3       | "2006-03-21" | "2009-01-21"
     6    |       7       |       3       | "2016-02-01" | "2017-12-31"
+	
+-MAINTENANCE TABLE-
+"maintenance_id" | "facility_id" |        "details"        |  "cost"
+ --------------- | ------------- | ----------------------- | --------
+        5        |       1       |  "fix toilet"           |    100
+        4        |       1       |  "replace carpet"       |    200
+        8        |       3       |  "new microwave"        |    500
+        7        |       3       |  "repair file cabinets" |   1500
+        6        |       4       |  "new refrigerator"     |    500
+        3        |       7       |  "repair door lock"     |     15
+        2        |       7       |  "change light bulbs"   |     25
+		
+-MAINT_REQUEST TABLE-
+"maint_request_id" | "facility_id" |          "details"            |  "cost"
+ ----------------- | ------------- | ----------------------------- | --------
+        6          |       1       |  "upgrade phone system"       |   3000
+        8          |       3       |  "office supplies"            |    200
+        9          |       3       |  "repair lockers"             |   1200
+        5          |       4       |  "new table and chairs"       |    200
+        7          |       4       |  "add AV capabilities"        |   1000
+       11          |       7       |  "carpet protectors (chairs)" |    700
+       10          |       7       |  "new ergonomic chairs"       |   2500
