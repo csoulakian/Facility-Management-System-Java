@@ -12,7 +12,8 @@ public class Client {
 	public static void main(String[] args) throws Exception {
 		
 		//FacilityClient facilityClient = new FacilityClient();
-		UseClient useClient = new UseClient();
+		//UseClient useClient = new UseClient();
+		MaintenanceClient maintenanceClient = new MaintenanceClient();
 
 	}
 
