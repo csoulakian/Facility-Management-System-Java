@@ -24,7 +24,17 @@ public class MaintenanceService {
 	    } catch (Exception se) {
 	      System.err.println("MaintenanceService: Threw an Exception scheduling maintenance.");
 	      System.err.println(se.getMessage());
-	    }		
+	    }
+	}
+	
+	public int calcMaintenanceCostForFacility(Facility fac) {
+		try {
+			return maintenanceDAO.calcMaintenanceCostForFacility(fac);
+	    } catch (Exception se) {
+	      System.err.println("MaintenanceService: Threw an Exception scheduling maintenance.");
+	      System.err.println(se.getMessage());
+	    }
+		return 0;
 	}
 	
 	

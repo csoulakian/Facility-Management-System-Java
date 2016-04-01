@@ -37,14 +37,18 @@ public class MaintenanceClient {
 		fact7.setDetailsAboutFacility(factDet7);
 		
 		
-		System.out.println("\nMaintenanceClient: *********** Creating new facility maintenance request *****************");
+		/*System.out.println("\nMaintenanceClient: *********** Creating new facility maintenance request *****************");
 		Maintenance maintenance = maintenanceService.makeFacilityMaintRequest(fact1, "testing maintenance", 100);
 		System.out.println("\nMaintenanceClient: *********** Maintenance request created *****************");
 		
 		
 		System.out.println("\nMaintenanceClient: *********** Scheduling this maintenance request *****************");
 		maintenanceService.scheduleMaintenance(maintenance);
-		System.out.println("\nMaintenanceClient: *********** Maintenance request scheduled *****************");
+		System.out.println("\nMaintenanceClient: *********** Maintenance request scheduled *****************");*/
+		
+		System.out.println("\nMaintenanceClient: *********** Calculate total maintenance cost *****************");
+		int totalCost = maintenanceService.calcMaintenanceCostForFacility(fact1);
+		System.out.println("The total cost of maintenance already completed at Facility #" + fact1.getFacilityID() + " is $" + totalCost + ".");
 		
 		
 		
