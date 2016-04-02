@@ -24,15 +24,16 @@ public class MaintenanceService {
 		try {
 			return maintenanceDAO.makeFacilityMaintRequest(fac, maintenanceDetails, cost);
 	    } catch (Exception se) {
-	      System.err.println("MaintenanceService: Threw an Exception making a maintenance request.");
+	      System.err.println("MaintenanceService: Threw an Exception making a "
+	      		+ "maintenance request.");
 	      System.err.println(se.getMessage());
 	    }
 		return null;
 	}
 	
 	/***
-	 * Schedules a maintenance request by moving the request from the table of maintenance requests
-	 * to the table of completed maintenance.
+	 * Schedules a maintenance request by moving the request from the table of 
+	 * maintenance requests to the table of completed maintenance.
 	 * @param maintRequest the request to be scheduled
 	 */
 	public void scheduleMaintenance(Maintenance maintRequest) {
@@ -53,14 +54,16 @@ public class MaintenanceService {
 		try {
 			return maintenanceDAO.calcMaintenanceCostForFacility(fac);
 	    } catch (Exception se) {
-	      System.err.println("MaintenanceService: Threw an Exception calculating maintenance cost for facility.");
+	      System.err.println("MaintenanceService: Threw an Exception calculating "
+	      		+ "maintenance cost for facility.");
 	      System.err.println(se.getMessage());
 	    }
 		return 0;
 	}
 	
 	/***
-	 * Lists maintenance requests that have yet to be scheduled/completed at a particular facility.
+	 * Lists maintenance requests that have yet to be scheduled/completed at a 
+	 * particular facility.
 	 * @param fac Facility to list the maintenance requests for
 	 * @return a list of Maintenance objects containing maintenance requests
 	 */
@@ -68,7 +71,8 @@ public class MaintenanceService {
 		try {
 			return maintenanceDAO.listMaintRequests(fac);
 		} catch (Exception se) {
-			System.err.println("MaintenanceService: Threw an Exception listing maintenance requests.");
+			System.err.println("MaintenanceService: Threw an Exception listing "
+					+ "maintenance requests.");
 		    System.err.println(se.getMessage());
 		}
 		return null;
@@ -83,17 +87,18 @@ public class MaintenanceService {
 		try {
 			return maintenanceDAO.listMaintenance(fac);
 		} catch (Exception se) {
-			System.err.println("MaintenanceService: Threw an Exception listing completed maintenance.");
+			System.err.println("MaintenanceService: Threw an Exception listing "
+					+ "completed maintenance.");
 		    System.err.println(se.getMessage());
 		}
 		return null;
 	}
 	
 	/***
-	 * Lists all problems that have affected a particular facility including current maintenance
-	 * requests and completed maintenance. 
+	 * Lists all problems that have affected a particular facility including 
+	 * current maintenance requests and completed maintenance. 
 	 * @param fac Facility to the list the problems
-	 * @return a list of Maintenance objects which are all the problems that have affected a facility
+	 * @return a list of Maintenance objects which are the problems that have affected a facility
 	 */
 	public List<Maintenance> listFacilityProblems(Facility fac) {
 		List<Maintenance> facilityProblems = new ArrayList<Maintenance>();
@@ -111,11 +116,30 @@ public class MaintenanceService {
 			
 			return facilityProblems;		
 		} catch (Exception se) {
-			System.err.println("MaintenanceService: Threw an Exception listing all facility problems.");
+			System.err.println("MaintenanceService: Threw an Exception "
+					+ "listing all facility problems.");
 		    System.err.println(se.getMessage());
 		}
 		return null;
 	}
 	
-	
+	/***
+	 * Calculates the down time for a facility with the assumption that each completed
+	 * maintenance item required 7 days of down time.
+	 * @param fac Facility to calculate the down time
+	 * @return down time in days
+	 */
+	public int calcDownTimeForFacility(Facility fac) {
+		int daysOfDownTime = 0;
+		try {
+			int numberOfCompletedMaintItems = maintenanceDAO.listMaintenance(fac).size();
+			daysOfDownTime = numberOfCompletedMaintItems * 7;
+		} catch (Exception se) {
+			System.err.println("MaintenanceService: Threw an Exception calculating "
+					+ "the down time for a facility.");
+		    System.err.println(se.getMessage());
+		}
+		
+		return daysOfDownTime;
+	}
 }

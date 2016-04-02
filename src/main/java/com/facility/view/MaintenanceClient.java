@@ -92,6 +92,10 @@ public class MaintenanceClient {
 			System.out.format("   %-30s%6s\n", row);
 		}
 		
+		System.out.println("\nMaintenanceClient: *********** Calculate the down time for a facility *****************");
+		int downTime = maintenanceService.calcDownTimeForFacility(fact3);
+		System.out.println("Facility #" + fact3.getFacilityID() + "was down for maintenance for " + downTime + " days total, "
+				+ "assuming each completed maintenance request took 7 days to complete.");
 	}
 	
 }
