@@ -1,1 +1,6 @@
+com.facility.base
 com.facility.dal
+com.facility.maintenance
+com.facility.service
+com.facility.use
+com.facility.view
