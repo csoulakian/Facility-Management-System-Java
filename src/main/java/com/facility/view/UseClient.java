@@ -153,7 +153,6 @@ public class UseClient {
 		//remove this new facility 12 for next time UseClient is run
 		facilityService.removeFacility(12);
 
-		
 	}
 	
 	

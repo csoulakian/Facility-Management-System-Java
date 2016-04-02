@@ -155,4 +155,20 @@ public class UseService {
 		
 	}
 	
+	/***
+	 * Gets the creation date of a facility, which is the earliest assigned start date at the facility.
+	 * Method is used in MaintenanceService to calculate the problem rate for a facility.
+	 * @param fac Facility to get the start date for
+	 * @return start date of the facility
+	 */
+	public LocalDate getFacilityStartDate(Facility fac) {
+		try {
+			return useDAO.getFacilityStartDate(fac);
+	    } catch (Exception se) {
+	      System.err.println("UseService: Threw an Exception retrieving the facility start date.");
+	      System.err.println(se.getMessage());
+	    }
+		return null;
+	}
+	
 }

@@ -1,9 +1,11 @@
 package com.facility.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 import com.facility.base.Facility;
 import com.facility.dal.MaintenanceDAO;
@@ -141,5 +143,26 @@ public class MaintenanceService {
 		}
 		
 		return daysOfDownTime;
+	}
+	
+	/***
+	 * Calculates the problem rate for a facility by dividing the down time for 
+	 * completed maintenance by the number of days since the facility was first created/assigned. 
+	 * @param fac Facility to calculate the problem rate for
+	 * @return the problem rate of the facility
+	 */
+	public double calcProblemRateForFacility(Facility fac) {
+		UseService useService = new UseService();
+		try {
+			LocalDate facilityStartDate = useService.getFacilityStartDate(fac);
+			double totalDays = ChronoUnit.DAYS.between(facilityStartDate, LocalDate.now());
+			return calcDownTimeForFacility(fac) / totalDays;
+		} catch (Exception se) {
+			System.err.println("MaintenanceService: Threw an Exception calculating "
+					+ "the down time for a facility.");
+		    System.err.println(se.getMessage());
+		}
+		
+		return 0;
 	}
 }

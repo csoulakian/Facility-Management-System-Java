@@ -1,5 +1,7 @@
 package com.facility.view;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import com.facility.base.Facility;
@@ -94,8 +96,15 @@ public class MaintenanceClient {
 		
 		System.out.println("\nMaintenanceClient: *********** Calculate the down time for a facility *****************");
 		int downTime = maintenanceService.calcDownTimeForFacility(fact3);
-		System.out.println("Facility #" + fact3.getFacilityID() + "was down for maintenance for " + downTime + " days total, "
+		System.out.println("Facility #" + fact3.getFacilityID() + " was down for maintenance for " + downTime + " days total, "
 				+ "assuming each completed maintenance request took 7 days to complete.");
+	
+		System.out.println("\nMaintenanceClient: *********** Calculate the problem rate for a facility *****************");
+		double problemRate = maintenanceService.calcProblemRateForFacility(fact3) * 100;
+		System.out.print("\nThe problem rate at Facility #" + fact3.getFacilityID() + " is ");
+		System.out.format("%.2f", problemRate);
+		System.out.print("%.");
+				
 	}
 	
 }
