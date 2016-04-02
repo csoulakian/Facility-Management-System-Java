@@ -6,6 +6,8 @@ public class FacilityDetail extends Facility {
 	private int numberOfRooms;
 	private int phoneNumber;
 	
+	public FacilityDetail() {}
+	
 	public String getName() {
 		return name;
 	}

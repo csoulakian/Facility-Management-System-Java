@@ -9,6 +9,7 @@ public class Facility {
 	private int facilityID;
 	private FacilityDetail detailsAboutFacility;
 		
+	public Facility() {}
 	
 	public FacilityDetail getDetailsAboutFacility() {
 		return detailsAboutFacility;
