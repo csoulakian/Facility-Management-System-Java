@@ -39,14 +39,14 @@ public class MaintenanceClient {
 		fact7.setDetailsAboutFacility(factDet7);
 		
 		
-		/*System.out.println("\nMaintenanceClient: *********** Creating new facility maintenance request *****************");
+		System.out.println("\nMaintenanceClient: *********** Creating new facility maintenance request *****************");
 		Maintenance maintenance = maintenanceService.makeFacilityMaintRequest(fact1, "testing maintenance", 100);
 		System.out.println("\nMaintenanceClient: *********** Maintenance request created *****************");
 		
 		
 		System.out.println("\nMaintenanceClient: *********** Scheduling this maintenance request *****************");
 		maintenanceService.scheduleMaintenance(maintenance);
-		System.out.println("\nMaintenanceClient: *********** Maintenance request scheduled *****************");*/
+		System.out.println("\nMaintenanceClient: *********** Maintenance request scheduled *****************");
 		
 		System.out.println("\nMaintenanceClient: *********** Calculate total maintenance cost of a facility *****************");
 		int totalCost = maintenanceService.calcMaintenanceCostForFacility(fact1);
@@ -69,13 +69,13 @@ public class MaintenanceClient {
 		//uses sample data to list completed maintenance, formatted as a table
 		System.out.println("\nMaintenanceClient: *********** List maintenance completed at a facility *****************");
 		List<Maintenance> maintenanceList = maintenanceService.listMaintenance(fact3);
-		Object[][] maintenance = new Object[maintenanceList.size() + 1][2];
-		maintenance[0] = new Object[] {"Maintenance Details", "Cost"};
+		Object[][] maintenanceTable = new Object[maintenanceList.size() + 1][2];
+		maintenanceTable[0] = new Object[] {"Maintenance Details", "Cost"};
 		for (int i = 1; i <= maintenanceList.size(); i++) {
-			maintenance[i] = new Object[] {maintenanceList.get(i-1).getDetails(), maintenanceList.get(i-1).getCost()};
+			maintenanceTable[i] = new Object[] {maintenanceList.get(i-1).getDetails(), maintenanceList.get(i-1).getCost()};
 		}
 		System.out.println("Maintenance completed at Facility #" + fact3.getFacilityID() + ":");
-		for (Object[] row : maintenance) {
+		for (Object[] row : maintenanceTable) {
 			System.out.format("   %-30s%6s\n", row);
 		}
 		
