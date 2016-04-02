@@ -30,11 +30,8 @@ public class UseService {
 	
 	/***
 	 * Checks if a particular room at a facility is in use during an interval.
-	 * Enter 0 for room number if checking the entire facility.
-	 * @param fac Facility to be checked
-	 * @param roomNumber room number to be checked (0 if entire facility)
-	 * @param startDate
-	 * @param endDate
+	 * Use 0 for room number if checking the entire facility.
+	 * @param facUse instance of FacilityUse to be checked which indicates the room number and start/end dates
 	 * @return true if facility/room is in use, otherwise false
 	 */
 	public boolean isInUseDuringInterval(FacilityUse facUse) {
@@ -60,10 +57,7 @@ public class UseService {
 	/***
 	 * Assigns a facility and room number to use from a particular start date to a particular end date.
 	 * Enter room number 0 if assigning entire facility to use.
-	 * @param fac facility being assigned to use
-	 * @param roomNumber room number being assigned to use (0 if assigning entire facility)
-	 * @param startDate beginning date of use
-	 * @param endDate ending date of use
+	 * @param facUse the instance of FacilityUse to be assigned which indicates room number and start/end dates
 	 */
 	public void assignFacilityToUse(FacilityUse facUse) {
 		

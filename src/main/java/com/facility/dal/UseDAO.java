@@ -62,12 +62,9 @@ public class UseDAO {
 	
 	/***
 	 * Checks if a facility is in use during a particular interval by comparing the input 
-	 * parameters to the use table. Use room number 0 if checking entire facility.
+	 * parameter to the use table. Use room number 0 if checking entire facility.
 	 * When checking if entire facility is in use, but only some rooms are in use, will return false.
-	 * @param fac facility to be checked
-	 * @param roomNumber room number to be checked (0 if entire facility)
-	 * @param startDate
-	 * @param endDate
+	 * @param facUse instance of facUse to be checked which indicates the room number and start/end dates
 	 * @return true if facility/room is in use, otherwise false
 	 */
 	public boolean isInUseDuringInterval(FacilityUse facUse) {
@@ -115,10 +112,7 @@ public class UseDAO {
 	 * UseService has already confirmed validity of start and end date, existence of 
 	 * room number, and if room is already in use during this interval.
 	 * Room number 0 indicates the entire facility is being assigned to use.
-	 * @param fac Facility being assigned to use
-	 * @param roomNumber room being assigned to use. 0 = entire facility
-	 * @param startDate beginning date facility will be in use
-	 * @param endDate ending date facility will be in use
+	 * @param facUse instance of FacilityUse to be assigned which indicates the room number and start/end dates
 	 */
 	public void assignFacilityToUse(FacilityUse facUse) {
 		
