@@ -1,5 +1,8 @@
 package com.facility.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.facility.base.Facility;
@@ -81,6 +84,34 @@ public class MaintenanceService {
 			return maintenanceDAO.listMaintenance(fac);
 		} catch (Exception se) {
 			System.err.println("MaintenanceService: Threw an Exception listing completed maintenance.");
+		    System.err.println(se.getMessage());
+		}
+		return null;
+	}
+	
+	/***
+	 * Lists all problems that have affected a particular facility including current maintenance
+	 * requests and completed maintenance. 
+	 * @param fac Facility to the list the problems
+	 * @return a list of Maintenance objects which are all the problems that have affected a facility
+	 */
+	public List<Maintenance> listFacilityProblems(Facility fac) {
+		List<Maintenance> facilityProblems = new ArrayList<Maintenance>();
+		try {
+			facilityProblems.addAll(maintenanceDAO.listMaintRequests(fac));
+			facilityProblems.addAll(maintenanceDAO.listMaintenance(fac));
+			
+			//sort problems by cost
+			Collections.sort(facilityProblems, new Comparator<Maintenance>() {
+				@Override
+				public int compare(Maintenance m1, Maintenance m2) {
+					return (m2.getCost() > m1.getCost()) ? -1 : 1;
+				}
+			});
+			
+			return facilityProblems;		
+		} catch (Exception se) {
+			System.err.println("MaintenanceService: Threw an Exception listing all facility problems.");
 		    System.err.println(se.getMessage());
 		}
 		return null;

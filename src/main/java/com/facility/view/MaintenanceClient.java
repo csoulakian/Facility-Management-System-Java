@@ -79,7 +79,18 @@ public class MaintenanceClient {
 			System.out.format("   %-30s%6s\n", row);
 		}
 		
-
+		//uses sample data to list facility problems, formatted as a table
+		System.out.println("\nMaintenanceClient: *********** List all problems that have affected a facility *****************");
+		List<Maintenance> facilityProblemsList = maintenanceService.listFacilityProblems(fact3);
+		Object[][] problems = new Object[facilityProblemsList.size() + 1][2];
+		problems[0] = new Object[] {"Problem Details", "Cost"};
+		for (int i = 1; i <= facilityProblemsList.size(); i++) {
+			problems[i] = new Object[] {facilityProblemsList.get(i-1).getDetails(), facilityProblemsList.get(i-1).getCost()};
+		}
+		System.out.println("Problems at Facility #" + fact3.getFacilityID() + ":");
+		for (Object[] row : problems) {
+			System.out.format("   %-30s%6s\n", row);
+		}
 		
 	}
 	
