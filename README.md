@@ -1,5 +1,5 @@
 # Facility-Management-System-Java
-COMP 373/474 - Objects/Frameworks/Patterns - Spring 2016 - Project 1 using PostgreSQL on Heroku
+COMP 373/473 - Objects/Frameworks/Patterns - Spring 2016 - Project 1 using PostgreSQL on Heroku
 
 ###Project 1: Facility Management System Design and Implementation
 
