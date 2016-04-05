@@ -3,6 +3,8 @@ COMP 373/473 - Objects/Frameworks/Patterns - Spring 2016 - Project 1 using Postg
 
 ###Project 1: Facility Management System Design and Implementation
 
+**To Run:** There are 3 clients in src/main/java/com/facility/view (FacilityClient, UseClient, and MaintenanceClient). Run one client at a time and comment out the others in src/main/java/com/facility/view/Client.
+
 **Project Description:**
 
 In this project, we will start providing an object domain model for Facility Management System by
